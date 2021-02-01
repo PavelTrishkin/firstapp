@@ -10,9 +10,19 @@
     <servlet-name>FirstServlet</servlet-name>
     <servlet-class>ru.geekbrains.FirstServlet</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>SecondServlet</servlet-name>
+    <servlet-class>ru.geekbrains.SecondServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>FirstServlet</servlet-name>
     <url-pattern>/first-servlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>SecondServlet</servlet-name>
+    <url-pattern>/second</url-pattern>
   </servlet-mapping>
 </web-app>
