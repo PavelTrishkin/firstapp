@@ -58,23 +58,27 @@ public class ProductServlet extends HttpServlet {
             }
             productRepository.deleteById(id);
             resp.sendRedirect(getServletContext().getContextPath() + "/product");
-        } else if (req.getPathInfo().equals("/new")){
+        } else if (req.getPathInfo().equals("/new")) {
             Product product = new Product();
-            product.setId(null);
             req.setAttribute("product", product);
-            getServletContext().getRequestDispatcher("/WEB-INF/product_form.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/WEB-INF/product_new_form.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        long id;
+        Long id;
         try {
-            id = Long.parseLong(req.getParameter("id"));
+            if (req.getParameter("id") != null) {
+                id = Long.parseLong(req.getParameter("id"));
+            } else {
+                id = null;
+            }
         } catch (NumberFormatException ex) {
             resp.setStatus(400);
             return;
         }
+
         BigDecimal price;
         try {
             price = new BigDecimal(req.getParameter("price"));

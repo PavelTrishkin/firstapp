@@ -1,7 +1,6 @@
 package ru.geekbrains.lesson2.listener;
 
-import ru.geekbrains.lesson2.persist.Product;
-import ru.geekbrains.lesson2.persist.ProductRepository;
+import ru.geekbrains.lesson2.persist.*;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -13,6 +12,12 @@ public class BootstrapListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        sce.getServletContext().setAttribute("productRepository", initProductRepository());
+        sce.getServletContext().setAttribute("userRepository", initUserRepository());
+        sce.getServletContext().setAttribute("categoryRepository", initCategoryRepository());
+    }
+
+    private ProductRepository initProductRepository(){
         ProductRepository productRepository = new ProductRepository();
 
         productRepository.saveOrUpdate(new Product(null, "Product  1",
@@ -22,7 +27,26 @@ public class BootstrapListener implements ServletContextListener {
         productRepository.saveOrUpdate(new Product(null, "Product  3",
                 "Description of product 3", new BigDecimal(200)));
 
-        sce.getServletContext().setAttribute("productRepository", productRepository);
+        return productRepository;
     }
 
+    private UserRepository initUserRepository(){
+        UserRepository userRepository = new UserRepository();
+
+        userRepository.saveOrUpdate(new User(null, "Petr", "petr@mail.ru"));
+        userRepository.saveOrUpdate(new User(null, "Pavel", "pavel@mail.ru"));
+        userRepository.saveOrUpdate(new User(null, "Ivan", "ivan@mail.ru"));
+
+        return userRepository;
+    }
+
+    private CategoryRepository initCategoryRepository(){
+        CategoryRepository categoryRepository = new CategoryRepository();
+
+        categoryRepository.saveOrUpdate(new Category(null, "Fruit"));
+        categoryRepository.saveOrUpdate(new Category(null, "Vegetables"));
+        categoryRepository.saveOrUpdate(new Category(null, "Appliances"));
+
+        return categoryRepository;
+    }
 }

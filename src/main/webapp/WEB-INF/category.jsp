@@ -49,23 +49,43 @@
 <div class="container">
     <div class="row py-2">
         <div class="col-12">
-            <c:url value="/product" var="productSubmitUrl"/>
-            <form action="${productSubmitUrl}" method="post">
-                <input type="hidden" id="id" name="id" value="${product.id}">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${product.name}" placeholder="Enter name">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" class="form-control" id="description" name="description" value="${product.description}" placeholder="Enter description">
-                </div>
-                <div class="form-group">
-                    <label>Price</label>
-                    <input type="number" class="form-control" id="price" name="price" value="${product.price}" placeholder="Enter price">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            <c:url value="/category/new" var="categoryNewUrl">
+            </c:url>
+            <a class="btn btn-primary" href="${categoryNewUrl}">Add Category</a>
+        </div>
+
+        <div class="col-12">
+            <table class="table table-bordered my-2">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="category" items="${requestScope.categories}">
+                <tr>
+                    <th scope="row">
+                        <c:out value="${category.id}"/>
+                    </th>
+                    <td>
+                        <c:out value="${category.title}"/>
+                    </td>
+                    <td>
+                        <c:url value="/category/edit" var="categoryEditUrl">
+                            <c:param name="id" value="${category.id}"/>
+                        </c:url>
+                        <c:url value="/category/delete" var="categoryDeleteUrl">
+                            <c:param name="id" value="${category.id}"/>
+                        </c:url>
+                        <a class="btn btn-success" href="${categoryEditUrl}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" href="${categoryDeleteUrl}"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -81,5 +101,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
 </body>
+</html>

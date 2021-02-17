@@ -51,7 +51,6 @@
         <div class="col-12">
             <c:url value="/product" var="productSubmitUrl"/>
             <form action="${productSubmitUrl}" method="post">
-                <input type="hidden" id="id" name="id" value="${product.id}">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${product.name}" placeholder="Enter name">

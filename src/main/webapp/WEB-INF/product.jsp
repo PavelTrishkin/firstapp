@@ -28,7 +28,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">List</a>
+                <c:url value="/product/" var="productUrl">
+                </c:url>
+                <a class="nav-link" href="${productUrl}">Products</a>
+            </li>
+            <li class="nav-item active">
+                <c:url value="/user/" var="userUrl">
+                </c:url>
+                <a class="nav-link" href="${userUrl}">Users</a>
+            </li>
+            <li class="nav-item active">
+                <c:url value="/category/" var="categoryUrl">
+                </c:url>
+                <a class="nav-link" href="${categoryUrl}">Categories</a>
             </li>
         </ul>
     </div>
@@ -38,7 +50,6 @@
     <div class="row py-2">
         <div class="col-12">
             <c:url value="/product/new" var="productNewUrl">
-                <c:param name="id" value="${null}"/>
             </c:url>
             <a class="btn btn-primary" href="${productNewUrl}">Add Product</a>
         </div>
