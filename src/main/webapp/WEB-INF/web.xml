@@ -25,4 +25,14 @@
     <servlet-name>SecondServlet</servlet-name>
     <url-pattern>/second</url-pattern>
   </servlet-mapping>
+  
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error_403</location>
+  </error-page>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error_404</location>
+  </error-page>
 </web-app>
