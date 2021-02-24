@@ -1,6 +1,7 @@
 package ru.geekbrains.persist;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Named
-@SessionScoped
+@ApplicationScoped
 public class UserRepository implements Serializable {
 
     private final Map<Long, User> userMap = new ConcurrentHashMap<>();

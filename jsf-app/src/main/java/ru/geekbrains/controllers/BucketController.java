@@ -25,6 +25,12 @@ public class BucketController implements Serializable {
 
     public String addToCart(Product product) {
         bucketRepository.addToBucket(product);
+        return "/product.xhtml?faces-redirect-true";
+    }
+
+
+    public String deleteProduct(Product product) {
+        bucketRepository.removeFromBucket(product);
         return "/bucket.xhtml?faces-redirect-true";
     }
 }

@@ -36,42 +36,32 @@
 
 <div class="container">
 <div class="row py-2">
-    <h:form id="productForm">
+    <h:form id="categoryForm">
         <div class="col-12">
-            <h:commandButton value="Add Product" styleClass="btn btn-primary"
-                             action="#{productController.createProduct()}"/>
+            <h:commandButton value="Add Category" styleClass="btn btn-primary"
+                             action="#{categoryController.createCategory()}"/>
         </div>
 
         <div class="col-12">
-            <h:dataTable value="#{productController.allProducts}" var="product"
+            <h:dataTable value="#{categoryController.allCategories}" var="category"
                          styleClass="table table-bordered my-2">
                 <h:column>
                     <f:facet name="header">Id</f:facet>
-                    #{product.id}
+                    #{category.id}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Name</f:facet>
-                    #{product.name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Description</f:facet>
-                    #{product.description}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Price</f:facet>
-                    #{product.price}
+                    <f:facet name="header">Title</f:facet>
+                    #{category.title}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Actions</f:facet>
 
                     <h:commandButton value="Edit" styleClass="btn btn-success"
-                                     action="#{productController.editProduct(product)}"/>
+                                     action="#{categoryController.editCategory(category)}"/>
                     <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                     action="#{productController.deleteProduct(product)}">
-                        <f:ajax event="click" render="productForm"/>
+                                     action="#{categoryController.deleteCategory(category)}">
+                        <f:ajax event="click" render="categoryForm"/>
                     </h:commandButton>
-                    <h:commandButton value="Add to cart" styleClass="btn btn-success"
-                                     action="#{bucketController.addToCart(product)}"/>
                 </h:column>
             </h:dataTable>
 
