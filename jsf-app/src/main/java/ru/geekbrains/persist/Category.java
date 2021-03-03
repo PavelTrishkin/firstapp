@@ -1,10 +1,27 @@
 package ru.geekbrains.persist;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "category")
+@NamedQueries({
+        @NamedQuery(name = "findAllCategory", query = "from Category"),
+        @NamedQuery(name = "countAllCategory", query = "select count(*) from Category"),
+        @NamedQuery(name = "deleteCategoryById", query = "delete from Category p where p.id = :id")
+})
 public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     Long id;
 
+    @Column
     String title;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     public Category() {
     }
@@ -12,6 +29,14 @@ public class Category {
     public Category(Long id, String title) {
         this.id = id;
         this.title = title;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Long getId() {

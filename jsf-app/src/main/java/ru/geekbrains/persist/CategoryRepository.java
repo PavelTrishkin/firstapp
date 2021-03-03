@@ -1,48 +1,79 @@
 package ru.geekbrains.persist;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.persistence.*;
+import javax.transaction.SystemException;
+import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Named
 @ApplicationScoped
 public class CategoryRepository implements Serializable {
 
-    private final Map<Long, Category> categoryMap = new ConcurrentHashMap<>();
+    private static final Logger logger = LoggerFactory.getLogger(CategoryRepository.class);
 
-    private final AtomicLong identity = new AtomicLong(0);
+    @PersistenceContext(unitName = "ds")
+    private EntityManager em;
+
+    @Resource
+    private UserTransaction ut;
+
 
     @PostConstruct
     void init(){
-        this.saveOrUpdate(new Category(null, "Fruit"));
-        this.saveOrUpdate(new Category(null, "Vegetables"));
-        this.saveOrUpdate(new Category(null, "Appliances"));
+        if (countAll() == 0) {
+            try {
+                ut.begin();
+
+                saveOrUpdate(new Category(null, "Fruit"));
+                saveOrUpdate(new Category(null, "Vegetables"));
+                saveOrUpdate(new Category(null, "Appliances"));
+                ut.commit();
+            } catch (Exception ex) {
+                logger.error("", ex);
+                try {
+                    ut.rollback();
+                } catch (SystemException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public List<Category> findAll() {
-        return new ArrayList<>(categoryMap.values());
+        return em.createNamedQuery("findAllCategory", Category.class)
+                .getResultList();
     }
 
     public Category findById(Long id) {
-        return categoryMap.get(id);
+        return em.find(Category.class, id);
     }
 
+    public Long countAll() {
+        return em.createNamedQuery("countAllCategory", Long.class)
+                .getSingleResult();
+    }
+
+    @Transactional
     public void saveOrUpdate(Category category) {
         if (category.getId() == null) {
-            Long id = identity.incrementAndGet();
-            category.setId(id);
+            em.persist(category);
         }
-        categoryMap.put(category.getId(), category);
+        em.merge(category);
     }
 
+    @Transactional
     public void deleteById(Long id) {
-        categoryMap.remove(id);
+        em.createNamedQuery("deleteCategoryById")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 }
