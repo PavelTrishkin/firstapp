@@ -28,7 +28,7 @@ public class CategoryRepository implements Serializable {
 
 
     @PostConstruct
-    void init(){
+    void init() throws SystemException {
         if (countAll() == 0) {
             try {
                 ut.begin();
@@ -39,11 +39,7 @@ public class CategoryRepository implements Serializable {
                 ut.commit();
             } catch (Exception ex) {
                 logger.error("", ex);
-                try {
-                    ut.rollback();
-                } catch (SystemException e) {
-                    e.printStackTrace();
-                }
+                ut.rollback();
             }
         }
     }
