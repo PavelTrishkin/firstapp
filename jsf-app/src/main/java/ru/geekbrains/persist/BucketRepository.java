@@ -1,6 +1,7 @@
 package ru.geekbrains.persist;
 
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -10,8 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Named
-@SessionScoped
+@Stateless
 public class BucketRepository implements Serializable {
 
     private Map<Long, Product> products = new HashMap<>();
@@ -20,8 +20,8 @@ public class BucketRepository implements Serializable {
         products.put(product.getId(), product);
     }
 
-    public void removeFromBucket(Product product) {
-        products.remove(product.getId());
+    public void deleteById(Long id) {
+        products.remove(id);
     }
 
     public List<Product> findAll() {

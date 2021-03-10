@@ -1,13 +1,14 @@
 package ru.geekbrains.persist;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
 @NamedQueries({
         @NamedQuery(name = "findAllCategory", query = "from Category"),
         @NamedQuery(name = "countAllCategory", query = "select count(*) from Category"),
-        @NamedQuery(name = "deleteCategoryById", query = "delete from Category p where p.id = :id")
+        @NamedQuery(name = "deleteCategoryById", query = "delete from Category p where p.id = :id"),
 })
 public class Category {
 
@@ -19,9 +20,8 @@ public class Category {
     @Column
     String title;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 
     public Category() {
     }
@@ -31,12 +31,12 @@ public class Category {
         this.title = title;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {
