@@ -1,7 +1,5 @@
-package ru.geekbrains.dto;
+package ru.geekbrains.services;
 
-import ru.geekbrains.persist.Category;
-import ru.geekbrains.persist.Product;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -23,14 +21,13 @@ public class ProductDto implements Serializable {
     public ProductDto() {
     }
 
-    public ProductDto(Product product) {
-        id = product.getId();
-        name = product.getName();
-        description = product.getDescription();
-        price = product.getPrice();
-        Category category = product.getCategory();
-        categoryId = category != null ? category.getId() : null;
-        categoryName = category != null ? category.getTitle() : null;
+    public ProductDto(Long id, String name, String description, BigDecimal price, Long categoryId, String categoryName) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
     }
 
     public Long getId() {
@@ -80,5 +77,4 @@ public class ProductDto implements Serializable {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-
 }

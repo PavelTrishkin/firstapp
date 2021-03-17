@@ -44,4 +44,14 @@ public class ProductRepository {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+    public Product findByName(String name) {
+        return em.createNamedQuery("findByName", Product.class).getSingleResult();
+    }
+
+    public List findProductByCategoryId(Long id) {
+        return em.createNamedQuery("findProductByCategoryId")
+                .setParameter("id", id)
+                .getResultList();
+    }
 }

@@ -8,7 +8,9 @@
     <artifactId>firstapp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>product-service-api</module>
         <module>jsf-app</module>
+        <module>remote-client</module>
     </modules>
     <packaging>pom</packaging>
 

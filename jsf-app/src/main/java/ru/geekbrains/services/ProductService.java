@@ -1,6 +1,8 @@
 package ru.geekbrains.services;
 
 import ru.geekbrains.dto.ProductDto;
+import ru.geekbrains.persist.Product;
+
 import javax.ejb.Local;
 import java.util.List;
 
@@ -15,4 +17,8 @@ public interface ProductService {
     void saveOrUpdate(ProductDto product);
 
     void deleteById(Long id);
+
+    Product findByName(String name);
+
+    List<Product> findAllByCategoryId(Long id);
 }
