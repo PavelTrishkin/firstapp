@@ -2,7 +2,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pp="http://primefaces.org/ui">
 
 <h:head>
     <!-- Required meta tags -->
@@ -44,6 +45,18 @@
                         <h:inputText p:type="number" styleClass="form-control" id="price"
                                      value="#{productController.product.price}"
                                      placeholder="Enter price"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+                        <h:selectOneListbox size="1" styleClass="form-control" id="productCategory"
+                                            value="#{productController.product.categoryId}">
+                            <f:selectItems value="#{productController.categories}"
+                                           var="cat"
+                                           itemValue="#{cat.id}"
+                                           itemLabel="#{cat.title}"
+                                           itemLabelEscaped="true"/>
+                        </h:selectOneListbox>
                     </div>
                     <h:commandButton value="Submit" styleClass="btn btn-primary"
                                      action="#{productController.saveProduct}"/>

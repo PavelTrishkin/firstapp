@@ -1,7 +1,8 @@
 <html lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:pp="http://primefaces.org/ui">
 
 <h:head>
     <!-- Required meta tags -->
@@ -45,12 +46,11 @@
                             #{product.price}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Actions</f:facet>
-
-                            <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                             action="#{bucketController.deleteProduct(product)}">
-                                <f:ajax event="click" render="bucketForm"/>
-                            </h:commandButton>
+                            <pp:commandButton styleClass="btn btn-danger"
+                                              icon="far fa-trash-alt"
+                                              action="#{bucketController.deleteProduct(product)}">
+                                <f:ajax event="click" render="cartForm"/>
+                        </pp:commandButton>
                         </h:column>
                     </h:dataTable>
 
