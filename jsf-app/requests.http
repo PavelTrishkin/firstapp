@@ -1,0 +1,32 @@
+GET http://localhost:8080/first-jsf-app/api/v1/product/
+
+###
+
+GET http://localhost:8080/first-jsf-app/api/v1/product/6
+
+###
+
+POST http://localhost:8080/first-jsf-app/api/v1/product/
+Content-Type: application/json
+
+{
+  "categoryId": 1,
+  "categoryName": "Category 1",
+  "description": "Product from REST",
+  "name": "Product from REST",
+  "price": 100.00
+}
+
+###
+
+PUT http://localhost:8080/first-jsf-app/api/v1/product/
+Content-Type: application/json
+
+{
+  "id": 6,
+  "categoryId": 1,
+  "categoryName": "Category 1",
+  "description": "Product from REST 1",
+  "name": "Product from REST 1",
+  "price": 150.00
+}

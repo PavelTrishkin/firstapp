@@ -1,8 +1,8 @@
 package ru.geekbrains.controllers;
 
-import ru.geekbrains.dto.ProductDto;
 import ru.geekbrains.persist.Category;
 import ru.geekbrains.persist.CategoryRepository;
+import ru.geekbrains.services.ProductDto;
 import ru.geekbrains.services.ProductService;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;

@@ -1,17 +1,18 @@
 package ru.geekbrains.persist;
 
-import ru.geekbrains.dto.ProductDto;
+import ru.geekbrains.services.ProductDto;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "product")
 @NamedQueries({
         @NamedQuery(name = "findAllProduct", query = "from Product"),
         @NamedQuery(name = "countAllProduct", query = "select count(*) from Product"),
-        @NamedQuery(name = "deleteProductById", query = "delete from Product p where p.id = :id")
+        @NamedQuery(name = "deleteProductById", query = "delete from Product p where p.id = :id"),
+        @NamedQuery(name = "findByName", query = "select p from Product p where p.name = :name"),
+        @NamedQuery(name = "findProductByCategoryId", query = "from Product p where p.category.id = :id")
 })
 public class Product {
 
